@@ -37,6 +37,10 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/', function homepage(req, res) {
+  res.sendFile(__dirname + '/views/index.html');
+});
+
 
 /*
  * JSON API Endpoints
@@ -60,6 +64,20 @@ app.get('/api', function api_index(req, res) {
   })
 });
 
+
+app.get('/api/profile', function api_index(req, res) {
+  // TODO: Document all your api endpoints below
+  res.json({
+    name: Sherie Carter,
+    githubLink: "https://github.com/sheriecarter",
+    githubProfileImage:"https://avatars1.githubusercontent.com/u/17553794?v=3&s=460",
+    personalSiteLink: "https://sheriecarter.github.io/",
+    currentCity: "San Francisco",
+    pets: [{name: "Gotti", type: "Dog", breed: "Bischon Frise"}, {name: "Irv", type: "Cat", breed: "Bischon Frise"}]
+
+
+  })
+});
 /**********
  * SERVER *
  **********/
