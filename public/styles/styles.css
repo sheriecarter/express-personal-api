@@ -1,7 +1,9 @@
 body {
-  color: #333;
+  color: white;
   font-family: Helvetica, Arial, sans-serif;
-  background-color: skyblue; /* Sanity Check! */
+  background-color: black;
+  /*background-image: -webkit-gradient(linear, 0% 0%,0% 100%, from (#66cccc), to (#336666);*/
+   /* Sanity Check! */
 }
 
 h1 {

@@ -15,11 +15,27 @@ app.use(function(req, res, next) {
   next();
 });
 
+// UPDATE
+app.put('/api/boutiques/:id', function(req, res){
+  var boutiqueID = req.params.boutiqueId;
+
+boutiques.findOne({ _id: boutiqueId }, function (err, foundBoutique)) {
+  foundBoutique.name = req.body.name;
+  foundBoutique.description = req.body.description;
+
+  foundBoutique.save(function (err, savedBoutique){
+    res.json(foundBoutique);
+  });
+});
+
+
+});
+
 /************
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -37,9 +53,6 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-app.get('/', function homepage(req, res) {
-  res.sendFile(__dirname + '/views/index.html');
-});
 
 
 /*
@@ -47,7 +60,6 @@ app.get('/', function homepage(req, res) {
  */
 
 app.get('/api', function api_index(req, res) {
-  // TODO: Document all your api endpoints below
   res.json({
     woopsIForgotToDocumentAllMyEndpoints: false, // CHANGE ME ;)
     message: "I created this website to show you my favorite boutiques!",
@@ -78,6 +90,57 @@ app.get('/api/profile', function api_index(req, res) {
 
   })
 });
+
+// get all boutiques
+app.get('/api/boutiques', function (req, res) {
+  // send all boutiques as JSON response
+  db.Boutique.find().populate('boutique')
+    .exec(function(err, boutiques) {
+      if (err) { return console.log("index error: " + err); }
+      res.json(boutiques);
+  });
+});
+
+// get one boutique
+app.get('/api/boutiques/:id', function (req, res) {
+  db.Boutique.findOne({_id: req.params._id }, function(err, data) {
+    res.json(data);
+  });
+});
+
+// create new Boutique
+app.post('/api/boutiques', function (req, res) {
+  // create new boutique with form data (`req.body`)
+  var newBoutique = new db.Boutique({
+    name: req.body.name,
+    owner: req.body.owner,
+    description: req.body.description
+  });
+
+  // add newBoutique to database
+  newBoutique.save(function(err, boutique){
+    if (err) {
+      return console.log("create error: " + err);
+    }
+    console.log("created ", boutique.name);
+    res.json(boutique);
+  });
+
+});
+
+
+// delete boutique
+app.delete('/api/boutiques/:id', function (req, res) {
+  // get book id from url params (`req.params`)
+  console.log(req.params)
+  var boutiqueId = req.params.id;
+
+  db.Boutique.findOneAndRemove({ _id: boutiqueId }, function (err, deletedBoutique) {
+    res.json(deletedBoutique);
+  });
+});
+
+
 /**********
  * SERVER *
  **********/

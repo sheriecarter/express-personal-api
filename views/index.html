@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blank</title>
+    <title>Personal API</title>
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -15,16 +16,81 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
-    <script src="/scripts/app.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
+    <script src="scripts/app.js"></script>
+</head>
+
+<body>
+
+    <h4><a href="/api/profile">Read My API Documentation</a></h4>
+
+    <h1 class="text-center">Black Owned Boutiques</h1>
+    <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
-          <h4><a href="/api">Read My API Documentation</a></h4>
+
+            <!--  beging of form-->
+            <form class="form-inline" id="newBoutiqueForm">
+                <div class="form-group">
+                    <label for="title">Boutique Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Boutique name">
+                </div>
+                <div class="form-group">
+                    <label for="title">Boutique Owner</label>
+                    <input type="text" class="form-control" name="owner" placeholder="Boutique owner">
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Boutique Description</label>
+                    <input type="text-area" class="form-control" name="description" placeholder="description">
+                </div>
+                <button type="submit" class="btn btn-default">Post Boutique</button>
+            </form>
+
+            <!-- end of form  -->
+
+            <!--  begin of boutique view-->
+            <div id='boutiqueTarget'>
+                <!-- handlebars template -->
+                <script id="boutiques-template" type="text/x-handlebars-template">
+                    {{#each boutiques}}
+                    <hr>
+                    <p>
+                        <b>{{name}}</b> by {{owner}}
+                    </p>
+                    <p>
+                        {{description}}
+                    </p>
+                    <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id={{_id}}>Delete</button> {{/each}}
+                </script>
+                <!--  profiletemplate-->
+
+
+
+                <!-- <div id="yourProfile">
+                    <script id="profile-template" type="text/x-handlebars-template">
+                        <hr>
+                        <p>
+                            <p>{{name}}</p>
+                            <p>
+                                <a href="{{githubLink}}">GitHub</a>
+                            </p>
+                            <p><img src="{{githubProfileImage}}"></p>
+                            <p>
+                                <a href="{{personalSiteLink}}">Personal Site</a>
+                            </p>
+                            <p>
+                                <a href={ {currentCity}}>Current City</a>
+                            </p>
+                            <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id={ {_id}}>Delete</button>
+                        </p>
+                    </script>
+                </div> -->
+
+
+            </div>
+
+            <!--  end boutiques view-->
         </div>
-      </div>
     </div>
-  </body>
+</body>
+
 </html>
