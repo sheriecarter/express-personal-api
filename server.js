@@ -15,21 +15,21 @@ app.use(function(req, res, next) {
   next();
 });
 
-// UPDATE
-app.put('/api/boutiques/:id', function(req, res){
-  var boutiqueID = req.params.boutiqueId;
-
-boutiques.findOne({ _id: boutiqueId }, function (err, foundBoutique)) {
-  foundBoutique.name = req.body.name;
-  foundBoutique.description = req.body.description;
-
-  foundBoutique.save(function (err, savedBoutique){
-    res.json(foundBoutique);
-  });
-});
-
-
-});
+// // UPDATE
+// app.put('/api/boutiques/:id', function(req, res){
+//   var boutiqueID = req.params.boutiqueId;
+//
+// boutiques.findOne({ _id: boutiqueId }, function (err, foundBoutique)) {
+//   foundBoutique.name = req.body.name;
+//   foundBoutique.description = req.body.description;
+//
+//   foundBoutique.save(function (err, savedBoutique){
+//     res.json(foundBoutique);
+//   });
+// });
+//
+//
+// });
 
 /************
  * DATABASE *
