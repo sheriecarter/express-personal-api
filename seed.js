@@ -4,7 +4,7 @@
 var db = require('./models');
 var mongoose = require('mongoose');
 
-var boutiques_list = [
+var boutiquesData = [
   {
     name: "SherieNicole",
     owner: "Sherie Carter",
@@ -17,63 +17,23 @@ var boutiques_list = [
   }
 ];
 
-var owners_list = [
-  {
-    name: "Sherie Carter"
-  },
-  {
-    name: "Nikki Graham"
-  }
-];
-
-
-  db.Boutique.remove({}, function(err, owners) {
-    console.log('removed all owners');
-    db.Boutique.create(owners_list, function(err, owners){
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log('recreated all owners');
-      console.log("created", owners.length, "owners");
-
-
-      db.Boutique.remove({}, function(err, boutiques){
-        console.log('removed all boutiques');
-        boutiques_list.forEach(function (boutiqueData) {
-          var boutique = new db.Boutique({
-            name: boutiqueData.name,
-            owner: boutiqueData.owner,
-            description: boutiqueData.description
-          });
-          db.Boutique.findOne({name: boutiqueData.owner}, function (err, foundOwner) {
-            console.log('found owner ' + boutiqueData.owner.name + ' for boutique ' + boutique.name);
-            if (err) {
-              console.log(err);
-              return;
-            }
-            boutique.owner = foundOwner;
-            boutique.save(function(err, savedBoutique){
-              if (err) {
-                return console.log(err);
-              }
-              console.log('saved ' + savedBoutique + ' by ' + boutique.owner);
-              mongoose.connection.close()
-            });
-          });
-        });
-      });
-
-    });
+var boutiques = boutiquesData.map(function (boutique) {
+  var boutique = new db.Boutique({
+    name: boutique.name,
+    owner: boutique.owner,
+    description: boutique.description
   });
+  return boutique;
+});
 
-// var new_campsite = {description: "Sharp rocks. Middle of nowhere."}
-
-// db.Campsite.create(new_campsite, function(err, campsite){
-//   if (err){
-//     return console.log("Error:", err);
-//   }
-
-//   console.log("Created new campsite", campsite._id)
-//   process.exit(); // we're all done! Exit the program.
-// })
+db.Boutique.remove({}, function(err, owners) {
+  console.log('removed all owners');
+  db.Boutique.create(boutiques, function(err, owners){
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log("\ncreated", boutiques);
+    mongoose.connection.close()
+  });
+});
