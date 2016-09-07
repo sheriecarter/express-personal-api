@@ -48,49 +48,40 @@
             <!-- end of form  -->
 
             <!--  begin of boutique view-->
-            <div id='boutiqueTarget'>
-                <!-- handlebars template -->
-                <script id="boutiques-template" type="text/x-handlebars-template">
-                    {{#each boutiques}}
-                    <hr>
-                    <p>
-                        <b>{{name}}</b> by {{owner}}
-                    </p>
-                    <p>
-                        {{description}}
-                    </p>
-                    <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id={{_id}}>Delete</button> {{/each}}
-                </script>
-                <!--  profiletemplate-->
-
-
-
-                <!-- <div id="yourProfile">
-                    <script id="profile-template" type="text/x-handlebars-template">
-                        <hr>
-                        <p>
-                            <p>{{name}}</p>
-                            <p>
-                                <a href="{{githubLink}}">GitHub</a>
-                            </p>
-                            <p><img src="{{githubProfileImage}}"></p>
-                            <p>
-                                <a href="{{personalSiteLink}}">Personal Site</a>
-                            </p>
-                            <p>
-                                <a href={ {currentCity}}>Current City</a>
-                            </p>
-                            <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id={ {_id}}>Delete</button>
-                        </p>
-                    </script>
-                </div> -->
-
-
-            </div>
+            <div id='boutiqueTarget'></div>
+            <div id="yourProfile"></div>
 
             <!--  end boutiques view-->
         </div>
     </div>
+    <script id="boutiques-template" type="text/x-handlebars-template">
+        {{#each boutiques}}
+        <hr>
+        <p>
+            <b>{{name}}</b> by {{owner}}
+        </p>
+        <p>
+            {{description}}
+        </p>
+        <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id={{_id}}>Delete</button> {{/each}}
+    </script>
+    <script id="profile-template" type="text/x-handlebars-template">
+        <hr>
+        <p>
+            <p>{{name}}</p>
+            <p>
+                <a href="{{githubLink}}">GitHub</a>
+            </p>
+            <p><img src="{{githubProfileImage}}"></p>
+            <p>
+                <a href="{{personalSiteLink}}">Personal Site</a>
+            </p>
+            <p>
+                <a href="#">{{currentCity}}</a>
+            </p>
+            <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id="{{_id}}">Delete</button>
+        </p>
+    </script>
 </body>
 
 </html>

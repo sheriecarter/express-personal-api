@@ -22,30 +22,30 @@ $(document).ready(function(){
     success: handleSuccess,
     error: handleError
   });
-// // Profile function
-// $.ajax({
-//   method: 'GET',
-//   url: '/api/profile',
-//   success: makeProfile,
-// });
+// Profile function
+$.ajax({
+  method: 'GET',
+  url: '/api/profile',
+  success: makeProfile,
+});
 
-// function makeProfile(json){
-//   var   source = $('#profile-template').html();
-//   console.log(source);
-//   var  template = Handlebars.compile(source);
-//
-//   var profilehtml = template({
-//     name: json.name,
-//     githubLink: json.githubLink,
-//     githubProfileImage: json.githubProfileImage,
-//     personalSiteLink: json.personalSiteLink,
-//     currentCity: json.currentCity
-//   });
-//
-//
-//   $('#yourProfile').append(profilehtml);
-//
-// }
+function makeProfile(json){
+  var   source = $('#profile-template').html();
+  console.log(source);
+  var  template = Handlebars.compile(source);
+
+  var profilehtml = template({
+    name: json.name,
+    githubLink: json.githubLink,
+    githubProfileImage: json.githubProfileImage,
+    personalSiteLink: json.personalSiteLink,
+    currentCity: json.currentCity
+  });
+
+
+  $('#yourProfile').append(profilehtml);
+
+}
 
 
 
